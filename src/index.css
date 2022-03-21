@@ -6,3 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.navbar {
+  background-color: black;
+  color: white;
+}
+
+.navbar-right {
+  float: right;
+}
