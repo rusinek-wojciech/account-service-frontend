@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { logoutUser } from '../features/authSlice'
-import { useAppDispatch } from '../hooks'
+
+import { useAppDispatch } from '../../hooks'
+import { logoutUser } from '../authSlice'
 
 const LogoutPage = () => {
   const dispatch = useAppDispatch()

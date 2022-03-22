@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { User } from '../types'
 
-const USER_KEY = 'user'
 const TOKEN_KEY = 'token'
 
 interface AuthState {
@@ -11,7 +11,6 @@ interface AuthState {
 
 const initialState: AuthState = {
   token: localStorage.getItem(TOKEN_KEY) ?? undefined,
-  user: JSON.parse(localStorage.getItem(USER_KEY) as string),
 }
 
 const authSlice = createSlice({
@@ -29,13 +28,10 @@ const authSlice = createSlice({
     },
 
     setLoggedUser(state, action: PayloadAction<User>) {
-      const user = action.payload
-      localStorage.setItem(USER_KEY, JSON.stringify(user))
-      state.user = user
+      state.user = action.payload
     },
 
     logoutUser(state) {
-      localStorage.removeItem(USER_KEY)
       localStorage.removeItem(TOKEN_KEY)
       state.user = undefined
       state.token = undefined

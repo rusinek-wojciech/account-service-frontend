@@ -22,9 +22,17 @@ export interface Payment {
   salary: string
 }
 
-export interface SignUpObject {
+export interface NewUser {
   name: string
   lastname: string
   email: string
   password: string
+}
+
+export interface ErrorResponse {
+  error: string
+  message: string
+  path: string
+  status: number
+  timestamp: Date
 }

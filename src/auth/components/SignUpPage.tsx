@@ -1,16 +1,14 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { setToken, setLoggedUser } from '../features/authSlice'
-import { useAppDispatch } from '../hooks'
-import { signUp } from '../service/authService'
+import { ErrorResponse } from '../../types'
+
+import { signUp } from '../authService'
 
 const SignUpPage = () => {
   const [name, setName] = useState<string>('')
   const [lastname, setLastname] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const [errorResponse, setErrorResponse] = useState<ErrorResponse>()
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>
     setName(e.target.value)
@@ -23,23 +21,35 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const user = await signUp({ name, lastname, email, password })
-    dispatch(setToken({ email, password }))
-    dispatch(setLoggedUser(user))
-    navigate('/')
+    await signUp({ name, lastname, email, password }).catch(
+      (err: ErrorResponse) => setErrorResponse(err)
+    )
   }
 
   return (
     <div>
       <h2>Sign Up Page</h2>
       <form onSubmit={handleSubmit}>
+        {!!errorResponse && (
+          <div>
+            <p>{`Status: ${errorResponse.status} ${errorResponse.error}`}</p>
+            <p>{`Message: ${errorResponse.message}`}</p>
+          </div>
+        )}
         <label htmlFor='name'>Name</label>
-        <input id='name' type='text' value={name} onChange={handleNameChange} />
+        <input
+          id='name'
+          type='text'
+          value={name}
+          autoComplete='on'
+          onChange={handleNameChange}
+        />
         <label htmlFor='lastname'>Lastname</label>
         <input
           id='lastname'
           type='text'
           value={lastname}
+          autoComplete='on'
           onChange={handleLastnameChange}
         />
         <label htmlFor='email'>Email</label>
@@ -47,6 +57,7 @@ const SignUpPage = () => {
           id='email'
           type='text'
           value={email}
+          autoComplete='on'
           onChange={handleEmailChange}
         />
         <label htmlFor='password'>Password</label>
@@ -54,6 +65,7 @@ const SignUpPage = () => {
           id='password'
           type='password'
           value={password}
+          autoComplete='on'
           onChange={handlePasswordChange}
         />
         <input type='submit' value='Submit' />

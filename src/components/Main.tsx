@@ -6,8 +6,8 @@ const Main = () => {
   const { user } = useAppSelector((state) => state.auth)
 
   const { data } = useGetUsersQuery(undefined, {
-    skip: !user,
     refetchOnMountOrArgChange: true,
+    skip: !user,
   })
 
   return (
@@ -16,7 +16,7 @@ const Main = () => {
       {!!data &&
         data.map((user) => {
           return (
-            <div>
+            <div key={user.id}>
               <span>{user.email}</span>
               <span>{user.roles.join(' ')}</span>
             </div>

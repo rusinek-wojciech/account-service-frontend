@@ -1,14 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-import { setLoggedUser, setToken } from '../features/authSlice'
-import { useAppDispatch } from '../hooks'
-import { login } from '../service/authService'
+import { useAppDispatch } from '../../hooks'
+import { setToken } from '../authSlice'
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -19,10 +16,6 @@ const LoginPage = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(setToken({ email, password }))
-    login()
-      .then((user) => dispatch(setLoggedUser(user)))
-      .then(() => navigate('/'))
-      .catch(() => console.warn(`Failed to login ${email} ${password}`))
   }
 
   return (
@@ -34,6 +27,7 @@ const LoginPage = () => {
           id='email'
           type='text'
           value={email}
+          autoComplete='on'
           onChange={handleEmailChange}
         />
         <label htmlFor='password'>Password</label>
@@ -41,6 +35,7 @@ const LoginPage = () => {
           id='password'
           type='password'
           value={password}
+          autoComplete='on'
           onChange={handlePasswordChange}
         />
         <input type='submit' value='Submit' />
