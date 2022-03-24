@@ -1,5 +1,5 @@
-import { store } from '../store'
-import { User, NewUser } from '../types'
+import { store } from '../redux/store'
+import { User, NewUser } from '../redux/features/api/types'
 import { setLoggedUser, setToken } from './authSlice'
 
 const authHeader = () => {

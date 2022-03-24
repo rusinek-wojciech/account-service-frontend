@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { useAppDispatch } from '../../hooks'
-import { ErrorResponse } from '../../types'
+import { useAppDispatch } from '../../redux/hooks'
+import { ErrorResponse } from '../../redux/features/api/types'
 import { logoutUser } from '../authSlice'
 
 /**

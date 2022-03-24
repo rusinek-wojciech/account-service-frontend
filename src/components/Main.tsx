@@ -1,5 +1,5 @@
-import { useGetUsersQuery } from '../features/api'
-import { useAppSelector } from '../hooks'
+import { useGetUsersQuery } from '../redux/features/api/api'
+import { useAppSelector } from '../redux/hooks'
 import Navbar from './Navbar'
 
 const Main = () => {

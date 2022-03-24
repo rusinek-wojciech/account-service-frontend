@@ -1,19 +1,13 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAppSelector } from '../hooks'
-import { User } from '../types'
+import { useAppSelector } from '../redux/hooks'
 import { login } from './authService'
-
-interface AutoLogin {
-  isLogged: boolean
-  user?: User
-}
 
 /**
  * Hook is autologging user if token has changed and redirects
  */
-const useAuthGuard = (): AutoLogin => {
+const useAuthGuard = () => {
   const { token, user } = useAppSelector((state) => state.auth)
   const navigate = useNavigate()
 

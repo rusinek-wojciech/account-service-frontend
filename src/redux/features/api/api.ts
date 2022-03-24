@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { RootState } from '../store'
-import { User, Payment } from '../types'
+import { RootState } from '../../store'
+import { User, Payment } from './types'
 
 export const api = createApi({
   reducerPath: 'api',

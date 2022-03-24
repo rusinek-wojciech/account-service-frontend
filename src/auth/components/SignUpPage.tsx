@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { ErrorResponse } from '../../types'
+import { ErrorResponse } from '../../redux/features/api/types'
 
 import { signUp } from '../authService'
 
