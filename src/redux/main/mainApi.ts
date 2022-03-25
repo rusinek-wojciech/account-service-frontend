@@ -11,6 +11,7 @@ import {
   UpdateLockUser,
   UpdateRole,
   Event,
+  Status,
 } from './types'
 
 const mainApi = createApi({
@@ -36,7 +37,7 @@ const mainApi = createApi({
       }),
     }),
 
-    lockOrUnlockUser: build.mutation<void, UpdateLockUser>({
+    lockOrUnlockUser: build.mutation<Status, UpdateLockUser>({
       query: (lockUser) => ({
         url: `/api/admin/user/access`,
         method: 'PUT',
@@ -97,7 +98,8 @@ const mainApi = createApi({
       query: () => ({ url: `/api/admin/user` }),
     }),
 
-    deleteUser: build.mutation<void, DeleteUser>({
+    // TODO: add user to Status
+    deleteUser: build.mutation<Status, DeleteUser>({
       query: ({ username }) => ({
         url: `/api/admin/user/${username}`,
         method: 'DELETE',

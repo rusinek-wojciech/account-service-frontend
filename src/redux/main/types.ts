@@ -14,6 +14,7 @@ export type User = {
   lastname: string
   email: string
   roles: string[]
+  locked: boolean
 }
 
 export type UpdateRole = {
@@ -69,4 +70,8 @@ export interface ErrorResponse {
   path: string
   status: number
   timestamp: Date
+}
+
+export interface Status {
+  status: string
 }

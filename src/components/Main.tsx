@@ -1,27 +1,26 @@
+import { Link } from 'react-router-dom'
 import { useAppSelector } from '../redux/hooks'
-import { useGetUsersQuery } from '../redux/main/mainApi'
+import { checkRoles } from '../services/utils'
 import Navbar from './Navbar'
 
 const Main = () => {
   const { user } = useAppSelector((state) => state.auth)
 
-  const { data } = useGetUsersQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    skip: !user,
-  })
-
   return (
     <div>
       <Navbar user={user} />
-      {!!data &&
-        data.map((user) => {
-          return (
-            <div key={user.id}>
-              <span>{user.email}</span>
-              <span>{user.roles.join(' ')}</span>
-            </div>
-          )
-        })}
+      {!!user && (
+        <>
+          <h2>{`Welcome ${user.name}!`}</h2>
+          <div>
+            {checkRoles(user, 'ADMINISTRATOR') && (
+              <Link to='/admin'>
+                <button>Admin Panel</button>
+              </Link>
+            )}
+          </div>
+        </>
+      )}
     </div>
   )
 }

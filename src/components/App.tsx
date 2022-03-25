@@ -4,8 +4,9 @@ import useAuthGuard from '../hooks/useAuthGuard'
 import AuthErrorPage from './AuthErrorPage'
 import LoginPage from './LoginPage'
 import LogoutPage from './LogoutPage'
-import Main from './Main'
+import AdminPanel from './AdminPanel'
 import SignUpPage from './SignUpPage'
+import Main from './Main'
 
 const App = () => {
   useAuthGuard()
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <Routes>
       <Route path='/' element={<Main />} />
+      <Route path='/admin' element={<AdminPanel />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/signup' element={<SignUpPage />} />
       <Route path='/logout' element={<LogoutPage />} />
