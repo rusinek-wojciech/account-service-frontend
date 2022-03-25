@@ -1,6 +1,6 @@
 import { store } from '../redux/store'
-import { User, NewUser } from '../redux/features/api/types'
-import { setLoggedUser, setToken } from './authSlice'
+import { setLoggedUser, setToken } from '../redux/auth/authSlice'
+import { NewUser, User } from '../redux/main/types'
 
 const authHeader = () => {
   const token = store.getState().auth.token

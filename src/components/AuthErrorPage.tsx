@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { useAppDispatch } from '../../redux/hooks'
-import { ErrorResponse } from '../../redux/features/api/types'
-import { logoutUser } from '../authSlice'
+import { useAppDispatch } from '../redux/hooks'
+import { ErrorResponse } from '../redux/main/types'
+import { logoutUser } from '../redux/auth/authSlice'
 
 /**
  * Log out when redirected here

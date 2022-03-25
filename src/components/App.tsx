@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
 
-import AuthErrorPage from '../auth/components/AuthErrorPage'
-import LoginPage from '../auth/components/LoginPage'
+import useAuthGuard from '../hooks/useAuthGuard'
+import AuthErrorPage from './AuthErrorPage'
+import LoginPage from './LoginPage'
+import LogoutPage from './LogoutPage'
 import Main from './Main'
-import LogoutPage from '../auth/components/LogoutPage'
-import SignUpPage from '../auth/components/SignUpPage'
-import useAuthGuard from '../auth/useAuthGuard'
+import SignUpPage from './SignUpPage'
 
 const App = () => {
   useAuthGuard()

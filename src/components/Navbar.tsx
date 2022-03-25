@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { User } from '../redux/features/api/types'
+import { User } from '../redux/main/types'
 
 interface Props {
   user?: User

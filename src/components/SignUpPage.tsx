@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { ErrorResponse } from '../../redux/features/api/types'
 
-import { signUp } from '../authService'
+import { ErrorResponse } from '../redux/main/types'
+import { signUp } from '../services/authService'
 
 const SignUpPage = () => {
   const [name, setName] = useState<string>('')

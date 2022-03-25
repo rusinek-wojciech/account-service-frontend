@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-import { useAppDispatch } from '../../redux/hooks'
-import { setToken } from '../authSlice'
+import { setToken } from '../redux/auth/authSlice'
+import { useAppDispatch } from '../redux/hooks'
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>('')

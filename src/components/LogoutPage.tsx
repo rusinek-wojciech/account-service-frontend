@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAppDispatch } from '../../redux/hooks'
-import { logoutUser } from '../authSlice'
+import { logoutUser } from '../redux/auth/authSlice'
+import { useAppDispatch } from '../redux/hooks'
 
 const LogoutPage = () => {
   const dispatch = useAppDispatch()

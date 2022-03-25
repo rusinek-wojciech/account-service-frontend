@@ -1,0 +1,8 @@
+{
+  "schemaFile": "http://localhost:28852/v3/api-docs",
+  "apiFile": "./src/redux/empty/emptyApi.ts",
+  "apiImport": "emptyApi",
+  "outputFile": "./src/redux/empty/mainApi.ts",
+  "exportName": "mainApi",
+  "hooks": true
+}

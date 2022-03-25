@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { User } from '../redux/features/api/types'
+import { User } from '../main/types'
 
 const TOKEN_KEY = 'token'
 
@@ -40,4 +40,5 @@ const authSlice = createSlice({
 })
 
 export const { setToken, setLoggedUser, logoutUser } = authSlice.actions
-export default authSlice.reducer
+
+export default authSlice
