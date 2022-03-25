@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAppSelector } from 'redux/hooks'
 import { checkRoles } from 'services/utils'
 
-const HomePage = () => {
+const Home = () => {
   const { user } = useAppSelector((state) => state.auth)
 
   return (
@@ -22,4 +22,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default Home

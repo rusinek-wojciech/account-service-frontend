@@ -8,7 +8,7 @@ import { ErrorResponse } from 'redux/main/types'
 /**
  * Log out when redirected here
  */
-const ErrorPage = () => {
+const Error = () => {
   const { state } = useLocation()
   const dispatch = useAppDispatch()
 
@@ -32,4 +32,4 @@ const ErrorPage = () => {
   )
 }
 
-export default ErrorPage
+export default Error

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const EmptyPage = () => {
+const Empty = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -15,4 +15,4 @@ const EmptyPage = () => {
   )
 }
 
-export default EmptyPage
+export default Empty
