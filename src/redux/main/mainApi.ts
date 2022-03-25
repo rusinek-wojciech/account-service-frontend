@@ -12,7 +12,9 @@ import {
   UpdateRole,
   Event,
   Status,
+  GetUser,
 } from './types'
+import { convertUser } from './utils'
 
 const mainApi = createApi({
   reducerPath: 'mainApi',
@@ -35,6 +37,7 @@ const mainApi = createApi({
         method: 'PUT',
         body: updateRole,
       }),
+      transformResponse: convertUser,
     }),
 
     lockOrUnlockUser: build.mutation<Status, UpdateLockUser>({
@@ -67,6 +70,7 @@ const mainApi = createApi({
         method: 'POST',
         body: newUser,
       }),
+      transformResponse: convertUser,
     }),
 
     changePassword: build.mutation<void, UpdatePassword>({
@@ -92,10 +96,12 @@ const mainApi = createApi({
       query: () => ({
         url: `/api/auth/login`,
       }),
+      transformResponse: convertUser,
     }),
 
     getUsers: build.query<User[], void>({
       query: () => ({ url: `/api/admin/user` }),
+      transformResponse: (response: GetUser[]) => response.map(convertUser),
     }),
 
     // TODO: add user to Status

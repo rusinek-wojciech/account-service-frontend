@@ -28,10 +28,12 @@ const UserTable = () => {
     }
   }, [resultDeleteUser])
 
-  const handleLockOrUnlock = (user: User) => () => {
-    const operation = user.locked ? 'UNLOCK' : 'LOCK'
-    lockOrUnlockUser({ user: user.email, operation })
-  }
+  const handleLockOrUnlock =
+    ({ email, accountNonLocked }: User) =>
+    () => {
+      const operation = accountNonLocked ? 'LOCK' : 'UNLOCK'
+      lockOrUnlockUser({ user: email, operation })
+    }
 
   const handleDelete = (user: User) => () => {
     const allowed = window.confirm('Are you sure?')
@@ -60,7 +62,7 @@ const UserTable = () => {
                 <td>{user.roles.join(', ')}</td>
                 <td>
                   <button onClick={handleLockOrUnlock(user)}>
-                    {user.locked ? 'Unlock' : 'Lock'}
+                    {user.accountNonLocked ? 'Lock' : 'Unlock'}
                   </button>
                   <button onClick={handleDelete(user)}>Delete</button>
                 </td>

@@ -10,8 +10,10 @@ const LogoutPage = () => {
 
   useEffect(() => {
     dispatch(logoutUser())
-    setTimeout(() => navigate('/'), 2500)
+    const id = setTimeout(() => navigate('/'), 2500)
+    return () => clearTimeout(id)
   }, [dispatch, navigate])
+
   return <h2>You have logout with success</h2>
 }
 

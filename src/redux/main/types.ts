@@ -13,8 +13,17 @@ export type User = {
   name: string
   lastname: string
   email: string
+  roles: Role[]
+  accountNonLocked: boolean
+}
+
+export type GetUser = {
+  id: number
+  name: string
+  lastname: string
+  email: string
   roles: string[]
-  locked: boolean
+  accountNonLocked: boolean
 }
 
 export type UpdateRole = {

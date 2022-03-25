@@ -1,6 +1,7 @@
 import { store } from '../redux/store'
 import { setLoggedUser, setToken } from '../redux/auth/authSlice'
-import { NewUser, User } from '../redux/main/types'
+import { NewUser } from '../redux/main/types'
+import { convertUser } from '../redux/main/utils'
 
 const authHeader = () => {
   const token = store.getState().auth.token
@@ -25,7 +26,7 @@ export const signUp = async (newUser: NewUser): Promise<void> => {
     throw await response.json()
   }
 
-  const user: User = await response.json()
+  const user = convertUser(await response.json())
   store.dispatch(setLoggedUser(user))
 
   const { email, password } = newUser
@@ -37,6 +38,6 @@ export const login = async (): Promise<void> => {
   if (response.status !== 200) {
     throw await response.json()
   }
-  const user: User = await response.json()
+  const user = convertUser(await response.json())
   store.dispatch(setLoggedUser(user))
 }
