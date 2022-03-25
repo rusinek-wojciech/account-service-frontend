@@ -1,29 +1,26 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, useReducer, Reducer } from 'react'
 
-import { ErrorResponse } from '../redux/main/types'
+import { ErrorResponse, NewUser } from '../redux/main/types'
 import { signUp } from '../services/authService'
 
-const SignUpPage = () => {
-  const [name, setName] = useState<string>('')
-  const [lastname, setLastname] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [errorResponse, setErrorResponse] = useState<ErrorResponse>()
+type Action = {
+  type: string
+  payload: string
+}
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value)
-  const handleLastnameChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setLastname(e.target.value)
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value)
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value)
+const SignUpPage = () => {
+  const [errorResponse, setErrorResponse] = useState<ErrorResponse>()
+  const [state, setState] = useReducer<Reducer<NewUser, Action>>(
+    (state, action) => ({ ...state, [action.type]: action.payload }),
+    { name: '', lastname: '', email: '', password: '' }
+  )
+
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) =>
+    setState({ type: target.id, payload: target.value })
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await signUp({ name, lastname, email, password }).catch(
-      (err: ErrorResponse) => setErrorResponse(err)
-    )
+    await signUp(state).catch((err: ErrorResponse) => setErrorResponse(err))
   }
 
   return (
@@ -40,33 +37,33 @@ const SignUpPage = () => {
         <input
           id='name'
           type='text'
-          value={name}
+          value={state.name}
           autoComplete='on'
-          onChange={handleNameChange}
+          onChange={handleChange}
         />
         <label htmlFor='lastname'>Lastname</label>
         <input
           id='lastname'
           type='text'
-          value={lastname}
+          value={state.lastname}
           autoComplete='on'
-          onChange={handleLastnameChange}
+          onChange={handleChange}
         />
         <label htmlFor='email'>Email</label>
         <input
           id='email'
           type='text'
-          value={email}
+          value={state.email}
           autoComplete='on'
-          onChange={handleEmailChange}
+          onChange={handleChange}
         />
         <label htmlFor='password'>Password</label>
         <input
           id='password'
           type='password'
-          value={password}
+          value={state.password}
           autoComplete='on'
-          onChange={handlePasswordChange}
+          onChange={handleChange}
         />
         <input type='submit' value='Submit' />
       </form>

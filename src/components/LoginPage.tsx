@@ -1,21 +1,31 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useReducer, Reducer } from 'react'
 
 import { setToken } from '../redux/auth/authSlice'
 import { useAppDispatch } from '../redux/hooks'
 
-const LoginPage = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const dispatch = useAppDispatch()
+type State = {
+  email: string
+  password: string
+}
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value)
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value)
+type Action = {
+  type: string
+  payload: string
+}
+
+const LoginPage = () => {
+  const dispatch = useAppDispatch()
+  const [state, setState] = useReducer<Reducer<State, Action>>(
+    (state, action) => ({ ...state, [action.type]: action.payload }),
+    { email: '', password: '' }
+  )
+
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) =>
+    setState({ type: target.id, payload: target.value })
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(setToken({ email, password }))
+    dispatch(setToken(state))
   }
 
   return (
@@ -26,17 +36,17 @@ const LoginPage = () => {
         <input
           id='email'
           type='text'
-          value={email}
+          value={state.email}
           autoComplete='on'
-          onChange={handleEmailChange}
+          onChange={handleChange}
         />
         <label htmlFor='password'>Password</label>
         <input
           id='password'
           type='password'
-          value={password}
+          value={state.password}
           autoComplete='on'
-          onChange={handlePasswordChange}
+          onChange={handleChange}
         />
         <input type='submit' value='Submit' />
       </form>
