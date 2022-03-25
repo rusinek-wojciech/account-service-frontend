@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { User } from '../main/types'
+import { User } from 'redux/main/types'
 
 const TOKEN_KEY = 'token'
 

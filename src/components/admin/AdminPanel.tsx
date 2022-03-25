@@ -1,5 +1,5 @@
-import { useAppSelector } from '../redux/hooks'
-import UserTable from './UserTable'
+import UserTable from 'components/admin/UserTable'
+import { useAppSelector } from 'redux/hooks'
 
 const AdminPanel = () => {
   const { user } = useAppSelector((state) => state.auth)

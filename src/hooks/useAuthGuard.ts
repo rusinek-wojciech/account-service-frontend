@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAppSelector } from '../redux/hooks'
-import { login } from '../services/authService'
+import { useAppSelector } from 'redux/hooks'
+import { login } from 'services/authService'
 
 /**
  * Hook is autologging user if token has changed and redirects

@@ -1,4 +1,4 @@
-import { GetUser, Role, User } from './types'
+import { GetUser, User, Role } from 'redux/main/types'
 
 export const convertUser = (user: GetUser): User => ({
   ...user,

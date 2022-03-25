@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useReducer, Reducer } from 'react'
 
-import { setToken } from '../redux/auth/authSlice'
-import { useAppDispatch } from '../redux/hooks'
+import { setToken } from 'redux/auth/authSlice'
+import { useAppDispatch } from 'redux/hooks'
 
 type State = {
   email: string

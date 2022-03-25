@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import {
+  useLockOrUnlockUserMutation,
   useDeleteUserMutation,
   useGetUsersQuery,
-  useLockOrUnlockUserMutation,
-} from '../redux/main/mainApi'
-import { User } from '../redux/main/types'
+} from 'redux/main/mainApi'
+import { User } from 'redux/main/types'
 
 const UserTable = () => {
   const [lockOrUnlockUser, resultLockOrUnlockUser] =

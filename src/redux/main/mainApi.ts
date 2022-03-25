@@ -1,20 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { RootState } from '../store'
 import {
-  Period,
-  DeleteUser,
-  UpdatePassword,
   User,
-  NewUser,
-  Payment,
-  UpdateLockUser,
   UpdateRole,
-  Event,
   Status,
+  UpdateLockUser,
+  Payment,
+  NewUser,
+  UpdatePassword,
+  Period,
   GetUser,
-} from './types'
-import { convertUser } from './utils'
+  DeleteUser,
+} from 'redux/main/types'
+import { convertUser } from 'redux/main/utils'
+import { RootState } from 'redux/store'
 
 const mainApi = createApi({
   reducerPath: 'mainApi',

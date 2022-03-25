@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../redux/hooks'
-import { checkRoles } from '../services/utils'
+
+import { useAppSelector } from 'redux/hooks'
+import { checkRoles } from 'services/utils'
 
 const HomePage = () => {
   const { user } = useAppSelector((state) => state.auth)

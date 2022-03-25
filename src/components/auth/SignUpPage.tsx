@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent, useReducer, Reducer } from 'react'
 
-import { ErrorResponse, NewUser } from '../redux/main/types'
-import { signUp } from '../services/authService'
+import { ErrorResponse, NewUser } from 'redux/main/types'
+import { signUp } from 'services/authService'
 
 type Action = {
   type: string

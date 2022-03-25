@@ -3,16 +3,16 @@ import { render } from 'react-dom'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import './index.css'
-import { store } from './redux/store'
-import App from './components/App'
-import AdminPanel from './components/AdminPanel'
-import AuthErrorPage from './components/AuthErrorPage'
-import LoginPage from './components/LoginPage'
-import LogoutPage from './components/LogoutPage'
-import SignUpPage from './components/SignUpPage'
-import HomePage from './components/HomePage'
-import EmptyPage from './components/EmptyPage'
+import 'index.css'
+import { store } from 'redux/store'
+import AdminPanel from 'components/admin/AdminPanel'
+import App from 'components/App'
+import LoginPage from 'components/auth/LoginPage'
+import LogoutPage from 'components/auth/LogoutPage'
+import SignUpPage from 'components/auth/SignUpPage'
+import EmptyPage from 'components/EmptyPage'
+import ErrorPage from 'components/ErrorPage'
+import HomePage from 'components/HomePage'
 
 render(
   <StrictMode>
@@ -23,10 +23,11 @@ render(
             <Route path='' element={<HomePage />} />
             <Route path='admin' element={<AdminPanel />} />
             <Route path='login' element={<LoginPage />} />
-            <Route path='signup' element={<SignUpPage />} />
+            <Route path='sign-up' element={<SignUpPage />} />
             <Route path='logout' element={<LogoutPage />} />
-            <Route path='error' element={<AuthErrorPage />} />
+            <Route path='error' element={<ErrorPage />} />
           </Route>
+          <Route path='error' element={<h2>test</h2>} />
           <Route path='*' element={<EmptyPage />} />
         </Routes>
       </BrowserRouter>

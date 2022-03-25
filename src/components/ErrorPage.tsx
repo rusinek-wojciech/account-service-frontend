@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { useAppDispatch } from '../redux/hooks'
-import { ErrorResponse } from '../redux/main/types'
-import { logoutUser } from '../redux/auth/authSlice'
+import { logoutUser } from 'redux/auth/authSlice'
+import { useAppDispatch } from 'redux/hooks'
+import { ErrorResponse } from 'redux/main/types'
 
 /**
  * Log out when redirected here
  */
-const AuthErrorPage = () => {
+const ErrorPage = () => {
   const { state } = useLocation()
   const dispatch = useAppDispatch()
 
@@ -32,4 +32,4 @@ const AuthErrorPage = () => {
   )
 }
 
-export default AuthErrorPage
+export default ErrorPage
