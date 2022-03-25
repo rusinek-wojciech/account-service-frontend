@@ -13,7 +13,7 @@ type Action = {
   payload: string
 }
 
-const LoginPage = () => {
+const Login = () => {
   const dispatch = useAppDispatch()
   const [state, setState] = useReducer<Reducer<State, Action>>(
     (state, action) => ({ ...state, [action.type]: action.payload }),
@@ -54,4 +54,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default Login

@@ -8,7 +8,7 @@ type Action = {
   payload: string
 }
 
-const SignUpPage = () => {
+const SignUp = () => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse>()
   const [state, setState] = useReducer<Reducer<NewUser, Action>>(
     (state, action) => ({ ...state, [action.type]: action.payload }),
@@ -71,4 +71,4 @@ const SignUpPage = () => {
   )
 }
 
-export default SignUpPage
+export default SignUp

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { logoutUser } from 'redux/auth/authSlice'
 import { useAppDispatch } from 'redux/hooks'
 
-const LogoutPage = () => {
+const Logout = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -17,4 +17,4 @@ const LogoutPage = () => {
   return <h2>You have logout with success</h2>
 }
 
-export default LogoutPage
+export default Logout

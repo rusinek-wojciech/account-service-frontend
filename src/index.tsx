@@ -7,9 +7,9 @@ import 'index.css'
 import { store } from 'redux/store'
 import AdminPanel from 'components/admin/AdminPanel'
 import App from 'components/App'
-import LoginPage from 'components/auth/LoginPage'
-import LogoutPage from 'components/auth/LogoutPage'
-import SignUpPage from 'components/auth/SignUpPage'
+import Login from 'components/auth/Login'
+import Logout from 'components/auth/Logout'
+import SignUp from 'components/auth/SignUp'
 import Empty from 'components/Empty'
 import Error from 'components/Error'
 import Home from 'components/Home'
@@ -22,9 +22,9 @@ render(
           <Route path='/' element={<App />}>
             <Route path='' element={<Home />} />
             <Route path='admin' element={<AdminPanel />} />
-            <Route path='login' element={<LoginPage />} />
-            <Route path='sign-up' element={<SignUpPage />} />
-            <Route path='logout' element={<LogoutPage />} />
+            <Route path='login' element={<Login />} />
+            <Route path='sign-up' element={<SignUp />} />
+            <Route path='logout' element={<Logout />} />
             <Route path='error' element={<Error />} />
           </Route>
           <Route path='error' element={<h2>test</h2>} />
