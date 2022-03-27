@@ -14,6 +14,7 @@ import Empty from 'components/special/Empty'
 import Error from 'components/special/Error'
 import Home from 'components/Home'
 import Auth from 'components/auth/Auth'
+import EventPanel from 'components/auditor/EventPanel'
 
 render(
   <StrictMode>
@@ -27,6 +28,14 @@ render(
               element={
                 <Auth roles={['ADMINISTRATOR']}>
                   <AdminPanel />
+                </Auth>
+              }
+            />
+            <Route
+              path='auditor'
+              element={
+                <Auth roles={['AUDITOR']}>
+                  <EventPanel />
                 </Auth>
               }
             />

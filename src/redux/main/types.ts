@@ -57,20 +57,22 @@ export type UpdatePassword = {
   newPassword: string
 }
 
+export type EventAction =
+  | 'CREATE_USER'
+  | 'CHANGE_PASSWORD'
+  | 'ACCESS_DENIED'
+  | 'LOGIN_FAILED'
+  | 'GRANT_ROLE'
+  | 'REMOVE_ROLE'
+  | 'LOCK_USER'
+  | 'UNLOCK_USER'
+  | 'DELETE_USER'
+  | 'BRUTE_FORCE'
+
 export type Event = {
   id: number
   date: string
-  action:
-    | 'CREATE_USER'
-    | 'CHANGE_PASSWORD'
-    | 'ACCESS_DENIED'
-    | 'LOGIN_FAILED'
-    | 'GRANT_ROLE'
-    | 'REMOVE_ROLE'
-    | 'LOCK_USER'
-    | 'UNLOCK_USER'
-    | 'DELETE_USER'
-    | 'BRUTE_FORCE'
+  action: EventAction
   subject: string
   object: string
   path: string

@@ -11,6 +11,7 @@ import {
   Period,
   GetUser,
   DeleteUser,
+  Event,
 } from 'redux/main/types'
 import { convertUser } from 'redux/main/utils'
 import { RootState } from 'redux/store'

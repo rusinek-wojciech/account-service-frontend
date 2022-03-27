@@ -16,6 +16,11 @@ const Home = () => {
               <button>Admin Panel</button>
             </Link>
           )}
+          {checkRoles(user, 'AUDITOR') && (
+            <Link to='/auditor'>
+              <button>Auditor Panel</button>
+            </Link>
+          )}
         </>
       )}
     </>
