@@ -5,6 +5,7 @@ export type Period = {
 }
 
 export type DeleteUser = {
+  id: number
   username: string
 }
 
@@ -27,12 +28,14 @@ export type GetUser = {
 }
 
 export type UpdateRole = {
+  id: number
   user: string
   role: Role
   operation: 'GRANT' | 'REMOVE'
 }
 
 export type UpdateLockUser = {
+  id: number
   user: string
   operation: 'LOCK' | 'UNLOCK'
 }

@@ -1,46 +1,21 @@
-import { useEffect } from 'react'
-import {
-  useLockOrUnlockUserMutation,
-  useDeleteUserMutation,
-  useGetUsersQuery,
-} from 'redux/main/mainApi'
 import { User } from 'redux/main/types'
 
-const UserTable = () => {
-  const [lockOrUnlockUser, resultLockOrUnlockUser] =
-    useLockOrUnlockUserMutation()
+type Props = {
+  onChangeLock: (user: User) => void
+  onDelete: (user: User) => void
+  onChangeRole: (user: User) => void
+  users?: User[]
+}
 
-  const [deleteUser, resultDeleteUser] = useDeleteUserMutation()
-
-  const { data: users } = useGetUsersQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  })
-
-  useEffect(() => {
-    if (!!resultLockOrUnlockUser.data) {
-      window.alert(resultLockOrUnlockUser.data.status)
-    }
-  }, [resultLockOrUnlockUser])
-
-  useEffect(() => {
-    if (!!resultDeleteUser.data) {
-      window.alert(resultDeleteUser.data.status)
-    }
-  }, [resultDeleteUser])
-
-  const handleLockOrUnlock =
-    ({ email, accountNonLocked }: User) =>
-    () => {
-      const operation = accountNonLocked ? 'LOCK' : 'UNLOCK'
-      lockOrUnlockUser({ user: email, operation })
-    }
-
-  const handleDelete = (user: User) => () => {
-    const allowed = window.confirm('Are you sure?')
-    if (allowed) {
-      deleteUser({ username: user.email })
-    }
-  }
+const UserTable = ({
+  onChangeLock,
+  onDelete,
+  onChangeRole,
+  users = [],
+}: Props) => {
+  const handleChangeLock = (user: User) => () => onChangeLock(user)
+  const handleDelete = (user: User) => () => onDelete(user)
+  const handleChangeRole = (user: User) => () => onChangeRole(user)
 
   return (
     <table>
@@ -52,23 +27,23 @@ const UserTable = () => {
           <th>Roles</th>
           <th>Controls</th>
         </tr>
-        {!!users &&
-          users.map((user) => {
-            return (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{`${user.name} ${user.lastname}`}</td>
-                <td>{user.email}</td>
-                <td>{user.roles.join(', ')}</td>
-                <td>
-                  <button onClick={handleLockOrUnlock(user)}>
-                    {user.accountNonLocked ? 'Lock' : 'Unlock'}
-                  </button>
-                  <button onClick={handleDelete(user)}>Delete</button>
-                </td>
-              </tr>
-            )
-          })}
+        {users.map((user) => {
+          return (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{`${user.name} ${user.lastname}`}</td>
+              <td>{user.email}</td>
+              <td>{user.roles.join(', ')}</td>
+              <td>
+                <button onClick={handleChangeLock(user)}>
+                  {user.accountNonLocked ? 'Lock' : 'Unlock'}
+                </button>
+                <button onClick={handleDelete(user)}>Delete</button>
+                <button onClick={handleChangeRole(user)}>Change role</button>
+              </td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   )

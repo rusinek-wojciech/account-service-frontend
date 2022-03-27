@@ -10,9 +10,10 @@ import App from 'components/App'
 import Login from 'components/auth/Login'
 import Logout from 'components/auth/Logout'
 import SignUp from 'components/auth/SignUp'
-import Empty from 'components/Empty'
-import Error from 'components/Error'
+import Empty from 'components/special/Empty'
+import Error from 'components/special/Error'
 import Home from 'components/Home'
+import Auth from 'components/auth/Auth'
 
 render(
   <StrictMode>
@@ -21,13 +22,19 @@ render(
         <Routes>
           <Route path='/' element={<App />}>
             <Route path='' element={<Home />} />
-            <Route path='admin' element={<AdminPanel />} />
+            <Route
+              path='admin'
+              element={
+                <Auth roles={['ADMINISTRATOR']}>
+                  <AdminPanel />
+                </Auth>
+              }
+            />
             <Route path='login' element={<Login />} />
             <Route path='sign-up' element={<SignUp />} />
             <Route path='logout' element={<Logout />} />
             <Route path='error' element={<Error />} />
           </Route>
-          <Route path='error' element={<h2>test</h2>} />
           <Route path='*' element={<Empty />} />
         </Routes>
       </BrowserRouter>

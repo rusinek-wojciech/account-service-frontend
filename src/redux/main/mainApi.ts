@@ -15,8 +15,11 @@ import {
 import { convertUser } from 'redux/main/utils'
 import { RootState } from 'redux/store'
 
+const USER_TAG: 'User' = 'User'
+
 const mainApi = createApi({
   reducerPath: 'mainApi',
+  tagTypes: [USER_TAG],
 
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
@@ -37,14 +40,16 @@ const mainApi = createApi({
         body: updateRole,
       }),
       transformResponse: convertUser,
+      invalidatesTags: (_result, _error, { id }) => [{ type: USER_TAG, id }],
     }),
 
-    lockOrUnlockUser: build.mutation<Status, UpdateLockUser>({
+    updateUserLock: build.mutation<Status, UpdateLockUser>({
       query: (lockUser) => ({
         url: `/api/admin/user/access`,
         method: 'PUT',
         body: lockUser,
       }),
+      invalidatesTags: (_result, _error, { id }) => [{ type: USER_TAG, id }],
     }),
 
     updatePayment: build.mutation<void, Payment>({
@@ -73,10 +78,10 @@ const mainApi = createApi({
     }),
 
     changePassword: build.mutation<void, UpdatePassword>({
-      query: ({ newPassword }) => ({
+      query: (updatePassword) => ({
         url: `/api/auth/changepass`,
         method: 'POST',
-        body: { newPassword },
+        body: updatePassword,
       }),
     }),
 
@@ -85,9 +90,9 @@ const mainApi = createApi({
     }),
 
     getPayment: build.query<void, Period>({
-      query: ({ period }) => ({
+      query: (period) => ({
         url: `/api/empl/payment`,
-        params: { period },
+        params: period,
       }),
     }),
 
@@ -101,6 +106,22 @@ const mainApi = createApi({
     getUsers: build.query<User[], void>({
       query: () => ({ url: `/api/admin/user` }),
       transformResponse: (response: GetUser[]) => response.map(convertUser),
+      providesTags: (result) =>
+        !!result
+          ? [
+              ...result.map(({ id }) => ({
+                type: USER_TAG,
+                id,
+              })),
+              USER_TAG,
+            ]
+          : [USER_TAG],
+    }),
+
+    getUser: build.query<User, number>({
+      query: (id) => ({ url: `/api/admin/user/${id}` }),
+      transformResponse: convertUser,
+      providesTags: (_result, _error, id) => [{ type: USER_TAG, id }],
     }),
 
     // TODO: add user to Status
@@ -109,13 +130,14 @@ const mainApi = createApi({
         url: `/api/admin/user/${username}`,
         method: 'DELETE',
       }),
+      invalidatesTags: (_result, _error, { id }) => [{ type: USER_TAG, id }],
     }),
   }),
 })
 
 export const {
   useUpdateUserRoleMutation,
-  useLockOrUnlockUserMutation,
+  useUpdateUserLockMutation,
   useUpdatePaymentMutation,
   useUploadPaymentMutation,
   useRegisterMutation,

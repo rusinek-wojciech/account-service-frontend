@@ -8,8 +8,8 @@ const Empty = () => {
 
   return (
     <>
-      <h2>This page is empty!</h2>
-      <p>{`Path "${location.pathname}" does not exist!`}</p>
+      <h2>Empty!</h2>
+      <p>{`This path "${location.pathname}" is empty or you do not have access!`}</p>
       <button onClick={handleClick}>Go back</button>
     </>
   )
