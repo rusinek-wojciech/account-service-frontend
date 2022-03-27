@@ -1,5 +1,11 @@
 import { Role, User } from '../redux/main/types'
 
-export const checkRoles = ({ roles }: User, role: Role): boolean => {
-  return roles.includes(role)
+/**
+ * @returns true when User has any allowed role
+ */
+export const isUserAllowed = (
+  { roles }: User,
+  allowedRoles: Role[]
+): boolean => {
+  return roles.some((role) => allowedRoles.includes(role))
 }

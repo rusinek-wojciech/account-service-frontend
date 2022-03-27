@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { useAppSelector } from 'redux/hooks'
-import { checkRoles } from 'services/utils'
+import { isUserAllowed } from 'services/utils'
 
 const Home = () => {
   const { user } = useAppSelector((state) => state.auth)
@@ -11,12 +11,12 @@ const Home = () => {
       <h2>{`Welcome ${user?.name ?? 'guest'}!`}</h2>
       {!!user && (
         <>
-          {checkRoles(user, 'ADMINISTRATOR') && (
+          {isUserAllowed(user, ['ADMINISTRATOR']) && (
             <Link to='/admin'>
               <button>Admin Panel</button>
             </Link>
           )}
-          {checkRoles(user, 'AUDITOR') && (
+          {isUserAllowed(user, ['AUDITOR']) && (
             <Link to='/auditor'>
               <button>Auditor Panel</button>
             </Link>

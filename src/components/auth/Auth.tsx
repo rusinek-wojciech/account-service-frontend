@@ -2,7 +2,7 @@ import Empty from 'components/special/Empty'
 import { Navigate } from 'react-router-dom'
 import { useAppSelector } from 'redux/hooks'
 import { Role } from 'redux/main/types'
-import { checkRoles } from 'services/utils'
+import { isUserAllowed } from 'services/utils'
 
 type Props = {
   children: JSX.Element
@@ -16,11 +16,7 @@ const Auth = ({ children, roles = ['USER'] }: Props) => {
     return <Navigate to='/login' />
   }
 
-  const isAllowed = roles
-    .map((role) => checkRoles(user, role))
-    .reduce((acc, allowed) => acc || allowed)
-
-  if (!isAllowed) {
+  if (!isUserAllowed(user, roles)) {
     return <Empty />
   }
 
