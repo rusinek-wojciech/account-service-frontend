@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { useAppSelector } from 'redux/hooks'
-import { isUserAllowed } from 'services/utils'
+import { isUserAllowed } from 'services/access/utils'
 
 const Home = () => {
   const { user } = useAppSelector((state) => state.auth)

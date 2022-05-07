@@ -2,7 +2,7 @@ import Empty from 'components/special/Empty'
 import { Navigate } from 'react-router-dom'
 import { useAppSelector } from 'redux/hooks'
 import { Role } from 'redux/main/types'
-import { isUserAllowed } from 'services/utils'
+import { isUserAllowed } from 'services/access/utils'
 
 type Props = {
   children: JSX.Element
