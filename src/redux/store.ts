@@ -1,12 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 
-import authSlice from 'redux/auth/authSlice'
 import mainApi from 'redux/main/mainApi'
+import appSlice from 'redux/app/appSlice'
+import authSlice from 'redux/auth/authSlice'
 
 export const store = configureStore({
   reducer: {
     [mainApi.reducerPath]: mainApi.reducer,
+    [appSlice.name]: appSlice.reducer,
     [authSlice.name]: authSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

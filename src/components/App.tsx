@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import Navbar from 'components/Navbar'
 import { useAppSelector } from 'redux/hooks'
 import { login } from 'services/authService'
+import StatusSnackbar from 'components/common/StatusSnackbar'
 
 const App = () => {
   const { token, user } = useAppSelector((state) => state.auth)
@@ -25,6 +26,7 @@ const App = () => {
     <>
       <Navbar user={user} />
       <Outlet></Outlet>
+      <StatusSnackbar />
     </>
   )
 }

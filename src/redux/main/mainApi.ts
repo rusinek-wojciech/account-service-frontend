@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import { openSnackbar } from 'redux/app/appSlice'
 
 import {
   User,
@@ -50,7 +51,10 @@ const mainApi = createApi({
         method: 'PUT',
         body: lockUser,
       }),
-      async onQueryStarted({ id, operation }, { dispatch, queryFulfilled }) {
+      async onQueryStarted(
+        { id, operation, user },
+        { dispatch, queryFulfilled }
+      ) {
         const patchResult = dispatch(
           mainApi.util.updateQueryData('getUsers', undefined, (draft) => {
             const user = draft.find((user) => user.id === id)
@@ -62,6 +66,12 @@ const mainApi = createApi({
         try {
           await queryFulfilled
         } catch {
+          dispatch(
+            openSnackbar({
+              message: `Failed to ${operation} user ${user}`,
+              color: 'error',
+            })
+          )
           patchResult.undo()
         }
       },
