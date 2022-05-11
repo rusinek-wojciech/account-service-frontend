@@ -4,6 +4,9 @@
   "private": true,
   "proxy": "https://localhost:28852",
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.7.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@rtk-query/codegen-openapi": "^1.0.0-alpha.1",
     "@testing-library/jest-dom": "^5.16.4",

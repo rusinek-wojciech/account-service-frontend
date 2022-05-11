@@ -50,6 +50,21 @@ const mainApi = createApi({
         method: 'PUT',
         body: lockUser,
       }),
+      async onQueryStarted({ id, operation }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          mainApi.util.updateQueryData('getUsers', undefined, (draft) => {
+            const user = draft.find((user) => user.id === id)
+            if (!!user) {
+              user.accountNonLocked = operation === 'UNLOCK'
+            }
+          })
+        )
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
       invalidatesTags: (_result, _error, { id }) => [{ type: USER_TAG, id }],
     }),
 
