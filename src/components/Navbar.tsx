@@ -1,12 +1,9 @@
 import { Link } from 'react-router-dom'
-import { User } from 'redux/main/types'
+import { useLoginQuery } from 'redux/main/mainApi'
 
-interface Props {
-  user?: User
-}
-
-const Navbar = ({ user }: Props) => {
-  return !!user ? (
+const Navbar = () => {
+  const { data: user } = useLoginQuery()
+  return user ? (
     <div className='navbar'>
       <b>{user.email}</b>
       <Link className='navbar-right' to='/logout'>

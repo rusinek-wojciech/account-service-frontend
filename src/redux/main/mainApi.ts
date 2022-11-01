@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { openSnackbar } from 'redux/app/appSlice'
+import { setLoggedUser } from 'redux/auth/authSlice'
 
 import {
   User,
@@ -15,7 +16,7 @@ import {
   Event,
 } from 'redux/main/types'
 import { convertUser } from 'redux/main/utils'
-import { RootState } from 'redux/store'
+import { RootState, store } from 'redux/store'
 
 const USER_TAG: 'User' = 'User'
 
@@ -126,7 +127,11 @@ const mainApi = createApi({
       query: () => ({
         url: `/api/auth/login`,
       }),
-      transformResponse: convertUser,
+      transformResponse: (response: GetUser) => {
+        const user = convertUser(response)
+        store.dispatch(setLoggedUser(user))
+        return user
+      },
     }),
 
     getUsers: build.query<User[], void>({

@@ -1,4 +1,9 @@
-export type Role = 'USER' | 'ACCOUNTANT' | 'ADMINISTRATOR' | 'AUDITOR'
+export enum Role {
+  USER = 'USER',
+  ACCOUNTANT = 'ACCOUNTANT',
+  ADMINISTRATOR = 'ADMINISTRATOR',
+  AUDITOR = 'AUDITOR',
+}
 
 export type Period = {
   period?: string

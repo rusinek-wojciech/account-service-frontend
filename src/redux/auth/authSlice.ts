@@ -1,16 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { User } from 'redux/main/types'
-
-const TOKEN_KEY = 'token'
+import { LocalStorageKey } from 'services/localstorage/types'
+import {
+  getStringLocalStorage,
+  removeLocalStorage,
+  setStringLocalStorage,
+} from 'services/localstorage/utils'
 
 interface AuthState {
-  token?: string
-  user?: User
+  token: string | null
+  user: User | null
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem(TOKEN_KEY) ?? undefined,
+  token: getStringLocalStorage(LocalStorageKey.TOKEN),
+  user: null,
 }
 
 const authSlice = createSlice({
@@ -23,7 +28,7 @@ const authSlice = createSlice({
     ) {
       const { email, password } = action.payload
       const token = btoa(`${email}:${password}`)
-      localStorage.setItem(TOKEN_KEY, token)
+      setStringLocalStorage(LocalStorageKey.TOKEN, token)
       state.token = token
     },
 
@@ -32,9 +37,9 @@ const authSlice = createSlice({
     },
 
     logoutUser(state) {
-      localStorage.removeItem(TOKEN_KEY)
-      state.user = undefined
-      state.token = undefined
+      removeLocalStorage(LocalStorageKey.TOKEN)
+      state.user = null
+      state.token = null
     },
   },
 })

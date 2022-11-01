@@ -1,22 +1,42 @@
 import Empty from 'components/special/Empty'
+import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAppSelector } from 'redux/hooks'
+import { useLoginQuery } from 'redux/main/mainApi'
 import { Role } from 'redux/main/types'
 import { isUserAllowed } from 'services/access/utils'
 
-type Props = {
+interface Props {
   children: JSX.Element
-  roles?: Role[]
+  allowedRoles?: Role[]
 }
 
-const Auth = ({ children, roles = ['USER'] }: Props) => {
-  const { user } = useAppSelector((state) => state.auth)
+const Auth = ({ children, allowedRoles = [] }: Props) => {
+  const token = useAppSelector((state) => state.auth.token)
 
-  if (!user) {
+  const {
+    data: user,
+    error,
+    isLoading,
+    refetch,
+  } = useLoginQuery(undefined, {
+    skip: !token,
+  })
+
+  useEffect(() => {
+    console.log('refetch')
+    refetch()
+  }, [refetch, token])
+
+  if (!token || error) {
     return <Navigate to='/login' />
   }
 
-  if (!isUserAllowed(user, roles)) {
+  if (isLoading || !user) {
+    return <p>Loading...</p>
+  }
+
+  if (!isUserAllowed(allowedRoles)) {
     return <Empty />
   }
 
